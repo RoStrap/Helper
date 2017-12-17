@@ -6,6 +6,9 @@ A shortcut function for creating instances
 
 You probably shouldn't use this function, but if you really really like it, here it is.
 ```lua
+local Resources = require(ReplicatedStorage:WaitForChild("Resources"))
+local Make = Resources:LoadLibrary("Make")
+
 Make("TextLabel"){
     TextSize = 11;
     Font = "Arial";
