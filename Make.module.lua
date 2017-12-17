@@ -1,16 +1,9 @@
 -- @author Validark
 -- @readme https://github.com/NevermoreFramework/Helper#make
 
-local type = type
-local unpack = unpack
-local setmetatable = setmetatable
-
-local Clone = game.Clone
-local CreateInstance = Instance.new
-
 return function(InstanceType)
 	return function(Table, ...)
-		local Object = CreateInstance(InstanceType)
+		local Object = Instance.new(InstanceType)
 		local Parent = Table.Parent
 	
 		if Parent then
@@ -32,7 +25,7 @@ return function(InstanceType)
 		if ... then
 			local Objects = {...}
 			for a = 1, #Objects do
-				local Object = Clone(Object)
+				local Object = Object:Clone()
 				for Property, Value in next, Objects[a] do
 					if type(Property) == "number" then
 						Value.Parent = Object
