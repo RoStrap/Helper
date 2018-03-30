@@ -1,5 +1,5 @@
 -- @author Validark
--- @readme https://github.com/NevermoreFramework/Helper#make
+-- @readme https://github.com/RoStrap/Helper#make
 
 return function(InstanceType)
 	return function(Table, ...)
