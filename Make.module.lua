@@ -1,3 +1,4 @@
+-- Callable Instance.new wrapper
 -- @author Validark
 -- @readme https://github.com/RoStrap/Helper#make
 
