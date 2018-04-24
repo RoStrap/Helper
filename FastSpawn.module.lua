@@ -22,3 +22,5 @@ local function FastSpawn(Func, ...)
     Bindable:Fire()
     Bindable:Destroy()
 end
+
+return FastSpawn
