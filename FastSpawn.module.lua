@@ -10,7 +10,7 @@ local function FastSpawn(Func, ...)
 
     local Bindable = Instance_new("BindableEvent")
 
-	if ... then
+	if ... ~= nil then
 		local t = {...}
 		Bindable.Event:Connect(function()
 			Func(unpack(t))
