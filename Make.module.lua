@@ -2,9 +2,11 @@
 -- @readme https://github.com/RoStrap/Helper#make
 -- @author Validark
 
-return function(InstanceType)
-	return function(Table, ...)
-		local Object = Instance.new(InstanceType)
+local Instance_new = Instance.new
+
+local function Make(InstanceType)
+	local function ClosureFunction(Table, ...)
+		local Object = Instance_new(InstanceType)
 		local Parent = Table.Parent
 	
 		if Parent then
@@ -42,4 +44,8 @@ return function(InstanceType)
 			return Object
 		end
 	end
+	
+	return ClosureFunction
 end
+
+return Make
