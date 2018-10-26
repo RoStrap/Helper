@@ -1,5 +1,4 @@
 -- Callable Instance.new wrapper
--- @readme https://github.com/RoStrap/Helper#make
 -- @author Validark
 
 local Instance_new = Instance.new
