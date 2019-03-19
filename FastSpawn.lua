@@ -1,26 +1,22 @@
 -- Spawns a new thread without waiting one step
+-- Fastest implementation I know of
+-- @author Validark
 
-local Instance_new = Instance.new
+local coroutine_wrap = coroutine.wrap
+local coroutine_yield = coroutine.yield
 
-local function FastSpawn(Func, ...)
-    --- Spawns a new thread to run a function on without waiting one step
-    -- @param function Func The function to run on a new thread
-	-- @{...} parameters to pass to Func
+local function FunctionWrapper(callback, ... )
+    coroutine_yield()
+    callback(...)
+end
 
+local Bindable = Instance.new("BindableEvent")
+Bindable.Event:Connect(function(callback) callback() end)
 
-    local Bindable = Instance_new("BindableEvent")
-
-	if ... ~= nil then
-		local t = {...}
-		Bindable.Event:Connect(function()
-			Func(unpack(t))
-		end)
-	else
-		Bindable.Event:Connect(Func)
-	end
-
-    Bindable:Fire()
-    Bindable:Destroy()
+local function FastSpawn(callback, ...)
+    local func = coroutine_wrap(FunctionWrapper)
+	func(callback, ...)
+    Bindable:Fire(func)
 end
 
 return FastSpawn
