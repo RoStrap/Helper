@@ -5,7 +5,7 @@
 local coroutine_wrap = coroutine.wrap
 local coroutine_yield = coroutine.yield
 
-local function FunctionWrapper(callback, ... )
+local function FunctionWrapper(callback, ...)
     coroutine_yield()
     callback(...)
 end
