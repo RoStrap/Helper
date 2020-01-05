@@ -1,19 +1,15 @@
 -- Spawns a new thread without waiting one step
--- Fastest implementation I know of
--- @author Validark
-
-local function FunctionWrapper(callback, ...)
-    coroutine.yield()
-    callback(...)
-end
-
-local Bindable = Instance.new("BindableEvent")
-Bindable.Event:Connect(function(callback) callback() end)
+-- See https://github.com/roblox-ts/roblox-ts/issues/668 for reason why we create a new BindableEvent each time
 
 local function FastSpawn(callback, ...)
-    local func = coroutine.wrap(FunctionWrapper)
-	func(callback, ...)
-    Bindable:Fire(func)
+	local spawnBindable = Instance.new("BindableEvent")
+	local args = { ... }
+	local length = select("#", ...)
+	spawnBindable.Event:Connect(function()
+		callback(unpack(args, 1, length))
+	end)
+	spawnBindable:Fire()
+	spawnBindable:Destroy()
 end
 
 return FastSpawn
